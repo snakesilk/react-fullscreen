@@ -1,6 +1,6 @@
 {
   "name": "react-full-screen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "ISC",
   "scripts": {
     "autoformat": "prettier --trailing-comma es5 --write './src/**/*.{js,jsx}'",
