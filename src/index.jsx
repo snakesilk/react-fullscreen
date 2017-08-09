@@ -1,23 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
-function isFullScreen() {
-  return (
-    document.isFullscreen ||
-    document.webkitIsFullScreen ||
-    document.mozIsFullScreen
-  );
-}
+import fscreen from "fscreen";
 
 class FullScreen extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     enabled: PropTypes.bool.isRequired,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
-    enabled: false
+    enabled: false,
   };
 
   constructor(props) {
@@ -29,18 +22,11 @@ class FullScreen extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener("mozfullscreenchange", this.detectFullScreen);
-    document.addEventListener("webkitfullscreenchange", this.detectFullScreen);
-    document.addEventListener("fullscreenchange", this.detectFullScreen);
+    fscreen.addEventListener("fullscreenchange", this.detectFullScreen);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("mozfullscreenchange", this.detectFullScreen);
-    document.removeEventListener(
-      "webkitfullscreenchange",
-      this.detectFullScreen
-    );
-    document.removeEventListener("fullscreenchange", this.detectFullScreen);
+    fscreen.removeEventListener("fullscreenchange", this.detectFullScreen);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,7 +34,7 @@ class FullScreen extends Component {
   }
 
   handleProps(props) {
-    const enabled = isFullScreen();
+    const enabled = fscreen.fullscreenElement;
     if (enabled && !props.enabled) {
       this.leaveFullScreen();
     } else if (!enabled && props.enabled) {
@@ -58,19 +44,16 @@ class FullScreen extends Component {
 
   detectFullScreen() {
     if (this.props.onChange) {
-      this.props.onChange(isFullScreen());
+      this.props.onChange(!!fscreen.fullscreenElement);
     }
   }
 
   enterFullScreen() {
-    const n = this.node;
-    (n.requestFullScreen || n.webkitRequestFullScreen || n.mozRequestFullScreen)
-      .call(n);
+    fscreen.requestFullscreen(this.node);
   }
 
   leaveFullScreen() {
-    const d = document;
-    (d.exitFullScreen || d.webkitExitFullscreen || d.mozExitFullScreen).call(d);
+    fscreen.exitFullscreen();
   }
 
   render() {
