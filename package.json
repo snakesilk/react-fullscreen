@@ -1,5 +1,6 @@
 {
   "name": "@snakesilk/react-fullscreen",
+  "license": "ISC",
   "scripts": {
     "autoformat": "prettier --write './src/**/*'",
     "build": "webpack"
