@@ -7,6 +7,7 @@ class FullScreen extends Component {
     children: PropTypes.node.isRequired,
     enabled: PropTypes.bool.isRequired,
     onChange: PropTypes.func,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -49,17 +50,21 @@ class FullScreen extends Component {
   }
 
   enterFullScreen() {
-    fscreen.requestFullscreen(this.node);
+    if (fscreen.fullscreenEnabled) {
+      fscreen.requestFullscreen(this.node);
+    }
   }
 
   leaveFullScreen() {
-    fscreen.exitFullscreen();
+    if (fscreen.fullscreenEnabled) {
+      fscreen.exitFullscreen();
+    }
   }
 
   render() {
     return (
       <div
-        className="FullScreen"
+        className={this.props.className}
         ref={node => (this.node = node)}
         style={{ height: "100%", width: "100%" }}
       >
