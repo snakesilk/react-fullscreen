@@ -49,11 +49,15 @@ class FullScreen extends Component {
   }
 
   enterFullScreen() {
-    fscreen.requestFullscreen(this.node);
+    if (fscreen.fullscreenEnabled) {
+      fscreen.requestFullscreen(this.node);
+    }
   }
 
   leaveFullScreen() {
-    fscreen.exitFullscreen();
+    if (fscreen.fullscreenEnabled) {
+      fscreen.exitFullscreen();
+    }
   }
 
   render() {
