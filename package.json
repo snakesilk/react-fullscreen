@@ -7,7 +7,9 @@
     "build": "babel ./src/ --out-dir ./dist"
   },
   "main": "dist/index.js",
+  "typings": "./index.d.ts",
   "dependencies": {
+    "@types/react": "*",
     "fscreen": "^1.0.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1"
