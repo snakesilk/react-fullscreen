@@ -66,7 +66,6 @@ class FullScreen extends Component {
       <div
         className={this.props.className}
         ref={node => (this.node = node)}
-        style={{ height: "100%", width: "100%" }}
       >
         {this.props.children}
       </div>
