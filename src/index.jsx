@@ -57,16 +57,18 @@ class FullScreen extends Component {
   }
 
   render() {
-    const className = ['FullScreen'];
+    const className = ["FullScreen"];
     if (this.props.enabled) {
-      className.push('isFullScreen');
+      className.push("isFullScreen");
     }
 
     return (
       <div
         className={className.join(" ")}
         ref={node => (this.node = node)}
-        style={{ height: "100%", width: "100%" }}
+        style={
+          this.props.enabled ? { height: "100%", width: "100%" } : undefined
+        }
       >
         {this.props.children}
       </div>
