@@ -4,17 +4,17 @@ A React component that sets its children to full screen using the Fullscreen API
 
 ## Usage
 
-* Install.
+### * Install.
 ```bash
 yarn add react-full-screen
 ```
 
-* Import component.
+### * Import component.
 ```js
 import Fullscreen from "react-full-screen";
 ```
 
-* Setup and render.
+### * Setup and render.
 ```jsx
 import React, { Component } from "react";
 import Fullscreen from "react-full-screen";
