@@ -1,7 +1,7 @@
 {
   "name": "react-full-screen",
   "version": "0.1.5",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/snakesilk/react-fullscreen.git"
