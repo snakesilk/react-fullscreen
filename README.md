@@ -21,21 +21,27 @@ import Fullscreen from "react-full-screen";
 
 class App extends Component {
   constructor(props) {
+    super();
+
     this.state = {
-      isFullscreenEnabled: false,
+      isFull: false,
     };
+  }
+
+  goFull = () => {
+    this.setState({ isFull: true });
   }
 
   render() {
     return (
       <div className="App">
-        <button onClick={() => this.setState({isFullscreenEnabled: true})}>
+        <button onClick={this.goFull}>
           Go Fullscreen
         </button>
 
         <Fullscreen
-          enabled={this.state.isFullscreenEnabled}
-          onChange={isFullscreenEnabled => this.setState({isFullscreenEnabled})}
+          enabled={this.state.isFull}
+          onChange={isFull => this.setState({isFull})}
         >
           <div className="full-screenable-node">
             Hi! This may cover the entire monitor.
