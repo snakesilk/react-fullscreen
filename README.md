@@ -49,7 +49,9 @@ class App extends Component {
 export default App;
 ```
 
-The reason for keeping track of the current state outside of the component is that the user can choose to leave full screen mode without the action of your application. This is a safety feature of the Fullscreen API. In order to enter full screen again, the `enabled` prop needs to be flipped.
+It is not possible to start in Fullscreen. Fullscreen must be enabled from a user action such as `onClick`.
+
+The reason for keeping track of the current state outside of the component is that the user can choose to leave full screen mode without the action of your application. This is a safety feature of the Fullscreen API.
 
 
 ## In the wild
