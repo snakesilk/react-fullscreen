@@ -59,6 +59,28 @@ It is not possible to start in Fullscreen. Fullscreen must be enabled from a use
 
 The reason for keeping track of the current state outside of the component is that the user can choose to leave full screen mode without the action of your application. This is a safety feature of the Fullscreen API.
 
+## Props
+
+### `enabled` *boolean*
+Set to `true` when component should go fullscreen.
+
+### `onChange` *function*
+Optional callback that gets called when state changes.
+
+
+## CSS
+
+Class `isFullScreen` will be added to component when it goes fullscreen. If you want to alter child elements when this happens you can use a typical CSS statement.
+
+```css
+.my-component {
+  background: #fff;
+}
+
+.isFullScreen .my-component {
+  background: #000;
+}
+```
 
 ## In the wild
 
