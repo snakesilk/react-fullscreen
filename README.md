@@ -50,3 +50,8 @@ export default App;
 ```
 
 The reason for keeping track of the current state outside of the component is that the user can choose to leave full screen mode without the action of your application. This is a safety feature of the Fullscreen API. In order to enter full screen again, the `enabled` prop needs to be flipped.
+
+
+## In the wild
+
+Used with [MegamanJS](http://megaman.pomle.com/)
