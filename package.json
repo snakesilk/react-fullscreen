@@ -6,6 +6,10 @@
     "type": "git",
     "url": "git+https://github.com/snakesilk/react-fullscreen.git"
   },
+  "keywords": [
+    "react",
+    "full screen"
+  ],
   "scripts": {
     "autoformat": "prettier --trailing-comma es5 --write './src/**/*.{js,jsx}'",
     "build": "babel ./src/ --out-dir ./dist"
