@@ -9,7 +9,7 @@ A React component that sets its children to full screen using the Fullscreen API
 yarn add react-full-screen
 ```
 
-* Require component.
+* Import component.
 ```js
 import Fullscreen from "react-full-screen";
 ```
