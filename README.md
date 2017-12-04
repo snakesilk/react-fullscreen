@@ -11,13 +11,13 @@ yarn add react-full-screen
 
 * Require component.
 ```js
-import Fullscreen from 'react-full-screen';
+import Fullscreen from "react-full-screen";
 ```
 
 * Setup and render.
 ```jsx
 import React, { Component } from "react";
-import Fullscreen from 'react-full-screen';
+import Fullscreen from "react-full-screen";
 
 class App extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class App extends Component {
           enabled={this.state.isFullscreenEnabled}
           onChange={isFullscreenEnabled => this.setState({isFullscreenEnabled})}
         >
-          <div className='full-screenable-node'>
+          <div className="full-screenable-node">
             Hi! This may cover the entire monitor.
           </div>
         </Fullscreen>
