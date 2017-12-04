@@ -1,6 +1,6 @@
 {
   "name": "react-full-screen",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -8,6 +8,7 @@
   },
   "keywords": [
     "react",
+    "fullscreen",
     "full screen"
   ],
   "scripts": {
