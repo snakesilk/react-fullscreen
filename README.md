@@ -70,14 +70,14 @@ Optional callback that gets called when state changes.
 
 ## CSS
 
-Class `isFullScreen` will be added to component when it goes fullscreen. If you want to alter child elements when this happens you can use a typical CSS statement.
+Class `fullscreen-enabled` will be added to component when it goes fullscreen. If you want to alter child elements when this happens you can use a typical CSS statement.
 
 ```css
 .my-component {
   background: #fff;
 }
 
-.isFullScreen .my-component {
+.fullscreen-enabled .my-component {
   background: #000;
 }
 ```
