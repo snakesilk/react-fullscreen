@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "autoformat": "prettier --trailing-comma es5 --write './src/**/*.{js,jsx}'",
+    "prepublish": "yarn run build",
     "build": "babel ./src/ --out-dir ./dist"
   },
   "main": "dist/index.js",
