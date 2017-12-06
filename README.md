@@ -1,6 +1,6 @@
-# React Full Screen
+# React Fullscreen
 
-A React component that sets its children to full screen using the Fullscreen API, normalized using [fscreen](https://github.com/rafrex/fscreen).
+A React component that sets its children to fullscreen using the Fullscreen API, normalized using [fscreen](https://github.com/rafrex/fscreen).
 
 ## Usage
 
