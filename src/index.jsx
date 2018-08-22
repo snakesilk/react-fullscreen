@@ -29,8 +29,10 @@ class FullScreen extends Component {
     fscreen.removeEventListener("fullscreenchange", this.detectFullScreen);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.handleProps(nextProps);
+  componentDidUpdate(prevProps) {
+    if (prevProps.enabled != this.props.enabled) {
+      this.handleProps(this.props);
+    }
   }
 
   handleProps(props) {
