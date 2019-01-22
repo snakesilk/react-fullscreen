@@ -17,8 +17,6 @@ class FullScreen extends Component {
     super(props);
 
     this.detectFullScreen = this.detectFullScreen.bind(this);
-    this.enterFullScreen = this.enterFullScreen.bind(this);
-    this.leaveFullScreen = this.leaveFullScreen.bind(this);
   }
 
   componentDidMount() {
