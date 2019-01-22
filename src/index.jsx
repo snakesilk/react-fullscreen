@@ -34,7 +34,7 @@ class FullScreen extends Component {
   }
 
   handleProps(props) {
-    const enabled = fscreen.fullscreenElement;
+    const enabled = fscreen.fullscreenElement === this.node;
     if (enabled && !props.enabled) {
       this.leaveFullScreen();
     } else if (!enabled && props.enabled) {
@@ -44,7 +44,7 @@ class FullScreen extends Component {
 
   detectFullScreen() {
     if (this.props.onChange) {
-      this.props.onChange(!!fscreen.fullscreenElement);
+      this.props.onChange(fscreen.fullscreenElement === this.node);
     }
   }
 
