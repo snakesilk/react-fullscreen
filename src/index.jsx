@@ -11,6 +11,7 @@ class FullScreen extends Component {
 
   static defaultProps = {
     enabled: false,
+    onChange: () => void 0,
   };
 
   constructor(props) {
