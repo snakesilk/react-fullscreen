@@ -17,6 +17,7 @@ class FullScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.fullScreenElement = null;
     this.detectFullScreen = this.detectFullScreen.bind(this);
   }
 
@@ -42,8 +43,12 @@ class FullScreen extends Component {
   }
 
   detectFullScreen() {
-    if (this.props.onChange) {
-      this.props.onChange(fscreen.fullscreenElement === this.node);
+    if (fscreen.fullscreenElement === this.node) {
+      this.fullScreenElement = fscreen.fullscreenElement;
+      this.props.onChange(true);
+    } else if (!fscreen.fullscreenElement && this.fullScreenElement) {
+      this.fullScreenElement = null;
+      this.props.onChange(false);
     }
   }
 
