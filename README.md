@@ -9,47 +9,91 @@ A React component that sets its children to fullscreen using the Fullscreen API,
 yarn add react-full-screen
 ```
 
-### * Import component.
+### * Import component and hook
 ```js
-import Fullscreen from "react-full-screen";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 ```
 
 ### * Setup and render.
+
+You **must** use one handle per full screen element.
+
 ```jsx
-import React, { Component } from "react";
-import Fullscreen from "react-full-screen";
+import React, {useCallback} from 'react';
+import { FullScreen, useFullscreenHandle } from "react-full-screen";
 
-class App extends Component {
-  constructor(props) {
-    super();
+function App() {
+  const handle = useFullscreenHandle();
 
-    this.state = {
-      isFull: false,
-    };
-  }
+  return (
+    <div>
+      <button onClick={handle.enter}>
+        Enter fullscreen
+      </button>
 
-  goFull = () => {
-    this.setState({ isFull: true });
-  }
+      <FullScreen handle={handle}>
+        Any fullscreen content here
+      </FullScreen>
+    </div>
+  );
+}
 
-  render() {
-    return (
-      <div className="App">
-        <button onClick={this.goFull}>
-          Go Fullscreen
-        </button>
+export default App;
+```
 
-        <Fullscreen
-          enabled={this.state.isFull}
-          onChange={isFull => this.setState({isFull})}
-        >
-          <div className="full-screenable-node">
-            Hi! This may cover the entire monitor.
-          </div>
-        </Fullscreen>
-      </div>
-    );
-  }
+When you have many elements you need one handle per element.
+```jsx
+import React, {useCallback} from 'react';
+import { FullScreen, useFullscreenHandle } from "react-full-screen";
+
+function App() {
+  const screen1 = useFullscreenHandle();
+  const screen2 = useFullscreenHandle();
+
+  const reportChange = useCallback((state, handle) => {
+    if (handle === screen1) {
+      console.log('Screen 1 went to', state, handle);
+    }
+    if (handle === screen2) {
+      console.log('Screen 2 went to', state, handle);
+    }
+  }, [screen1, screen2]);
+
+  return (
+    <div>
+      <button onClick={screen1.enter}>
+        First
+      </button>
+
+      <button onClick={screen2.enter}>
+        Second
+      </button>
+
+      <FullScreen handle={screen1} onChange={reportChange}>
+        <div className="full-screenable-node" style={{background: "red"}}>
+          First
+          <button onClick={screen2.enter}>
+            Switch
+          </button>
+          <button onClick={screen1.exit}>
+            Exit
+          </button>
+        </div>
+      </FullScreen>
+
+      <FullScreen handle={screen2} onChange={reportChange}>
+        <div className="full-screenable-node" style={{background: "green"}}>
+          Second
+          <button onClick={screen1.enter}>
+            Switch
+          </button>
+          <button onClick={screen2.exit}>
+            Exit
+          </button>
+        </div>
+      </FullScreen>
+    </div>
+  );
 }
 
 export default App;
@@ -57,16 +101,34 @@ export default App;
 
 It is not possible to start in Fullscreen. Fullscreen must be enabled from a user action such as `onClick`.
 
-The reason for keeping track of the current state outside of the component is that the user can choose to leave full screen mode without the action of your application. This is a safety feature of the Fullscreen API.
+## Types
 
-## Props
 
-### `enabled` *boolean*
-Set to `true` when component should go fullscreen.
+```ts
+interface FullScreenHandle {
+  active: boolean;
+  // Specifies if attached element is currently full screen.
 
-### `onChange` *function*
-Optional callback that gets called when state changes.
+  enter: () => void;
+  // Requests this element to go full screen.
 
+  exit: () => void;
+  // Requests this element to exit full screen.
+
+  node: React.MutableRefObject<HTMLDivElement | null>;
+  // The attached DOM node
+}
+```
+
+```ts
+interface FullScreenProps {
+  handle: FullScreenHandle;
+  // Handle that helps operate the full screen state.
+
+  onChange?: (state: boolean, handle: FullScreenHandle) => void;
+  // Optional callback that gets called when this screen changes state.
+}
+```
 
 ## CSS
 
