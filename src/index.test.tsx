@@ -1,4 +1,4 @@
-import FullScreen, { useFullScreenHandle } from '.'
+import { FullScreen, useFullScreenHandle } from '.'
 
 describe('FullScreen component', () => {
   it('is exported', () => {
