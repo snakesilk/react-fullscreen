@@ -18,15 +18,3 @@ declare module '*.svg' {
 }
 
 declare module 'fscreen'
-
-interface FullScreenHandle {
-  active: boolean
-  enter: () => void
-  exit: () => void
-  node: React.MutableRefObject<HTMLDivElement | null>
-}
-
-interface FullScreenProps {
-  handle: FullScreenHandle
-  onChange?: (state: boolean, handle: FullScreenHandle) => void
-}
