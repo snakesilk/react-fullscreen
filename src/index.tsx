@@ -1,6 +1,18 @@
 import React, { useCallback, useState, useRef, useEffect } from 'react'
 import fscreen from 'fscreen'
 
+export interface FullScreenHandle {
+  active: boolean
+  enter: () => void
+  exit: () => void
+  node: React.MutableRefObject<HTMLDivElement | null>
+}
+
+export interface FullScreenProps {
+  handle: FullScreenHandle
+  onChange?: (state: boolean, handle: FullScreenHandle) => void
+}
+
 export function useFullScreenHandle(): FullScreenHandle {
   const [active, setActive] = useState<boolean>(false)
   const node = useRef<HTMLDivElement | null>(null)
