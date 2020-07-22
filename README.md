@@ -20,10 +20,10 @@ You **must** use one handle per full screen element.
 
 ```jsx
 import React, {useCallback} from 'react';
-import { FullScreen, useFullscreenHandle } from "react-full-screen";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 function App() {
-  const handle = useFullscreenHandle();
+  const handle = useFullScreenHandle();
 
   return (
     <div>
@@ -44,11 +44,11 @@ export default App;
 When you have many elements you need one handle per element.
 ```jsx
 import React, {useCallback} from 'react';
-import { FullScreen, useFullscreenHandle } from "react-full-screen";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 function App() {
-  const screen1 = useFullscreenHandle();
-  const screen2 = useFullscreenHandle();
+  const screen1 = useFullScreenHandle();
+  const screen2 = useFullScreenHandle();
 
   const reportChange = useCallback((state, handle) => {
     if (handle === screen1) {
