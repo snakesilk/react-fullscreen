@@ -11,6 +11,7 @@ export interface FullScreenHandle {
 export interface FullScreenProps {
   handle: FullScreenHandle;
   onChange?: (state: boolean, handle: FullScreenHandle) => void;
+  className?: string;
 }
 
 export function useFullScreenHandle(): FullScreenHandle {
@@ -54,6 +55,7 @@ export const FullScreen: React.FC<FullScreenProps> = ({
   handle,
   onChange,
   children,
+  className,
 }) => {
   const classNames = ['fullscreen'];
   if (handle.active) {
@@ -68,7 +70,7 @@ export const FullScreen: React.FC<FullScreenProps> = ({
 
   return (
     <div
-      className={classNames.join(' ')}
+      className={[className, ...classNames].join(' ')}
       ref={handle.node}
       style={handle.active ? { height: '100%', width: '100%' } : undefined}
     >
