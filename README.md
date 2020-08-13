@@ -127,6 +127,9 @@ interface FullScreenProps {
 
   onChange?: (state: boolean, handle: FullScreenHandle) => void;
   // Optional callback that gets called when this screen changes state.
+  
+  className?: string;
+  // Optional prop allowing you to apply a custom class name to the FullScreen container
 }
 ```
 
