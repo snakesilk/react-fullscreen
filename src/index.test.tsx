@@ -89,6 +89,25 @@ describe('useFullScreenHandle', () => {
       });
     });
 
+    describe('and enter() fails', () => {
+      const mockError = new Error('Full sceen failed');
+      let caughtError: Error;
+
+      beforeEach(async () => {
+        fscreen.requestFullscreen = () => Promise.reject(mockError);
+
+        await act(() => {
+          return hook.result.current
+            .enter()
+            .catch((error) => (caughtError = error));
+        });
+      });
+
+      it('error can be caught', () => {
+        expect(caughtError).toBe(mockError);
+      });
+    });
+
     describe('when entered', () => {
       beforeEach(() => {
         fscreen.fullscreenElement = mockNode;
@@ -123,6 +142,25 @@ describe('useFullScreenHandle', () => {
 
         it('does not call fscreen.requestFullscreen', () => {
           expect(fscreen.requestFullscreen).toHaveBeenCalledTimes(0);
+        });
+      });
+
+      describe('and exit() fails', () => {
+        const mockError = new Error('Exit full sceen failed');
+        let caughtError: Error;
+
+        beforeEach(async () => {
+          fscreen.exitFullscreen = () => Promise.reject(mockError);
+
+          await act(() => {
+            return hook.result.current
+              .exit()
+              .catch((error) => (caughtError = error));
+          });
+        });
+
+        it('error can be caught', () => {
+          expect(caughtError).toBe(mockError);
         });
       });
     });
