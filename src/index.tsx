@@ -3,8 +3,8 @@ import fscreen from 'fscreen';
 
 export interface FullScreenHandle {
   active: boolean;
-  enter: () => void;
-  exit: () => void;
+  enter: () => Promise<void>;
+  exit: () => Promise<void>;
   node: React.MutableRefObject<HTMLDivElement | null>;
 }
 
@@ -27,18 +27,19 @@ export function useFullScreenHandle(): FullScreenHandle {
 
   const enter = useCallback(() => {
     if (fscreen.fullscreenElement) {
-      fscreen.exitFullscreen().then(() => {
-        fscreen.requestFullscreen(node.current);
+      return fscreen.exitFullscreen().then(() => {
+        return fscreen.requestFullscreen(node.current);
       });
     } else if (node.current) {
-      fscreen.requestFullscreen(node.current);
+      return fscreen.requestFullscreen(node.current);
     }
   }, []);
 
   const exit = useCallback(() => {
     if (fscreen.fullscreenElement === node.current) {
-      fscreen.exitFullscreen();
+      return fscreen.exitFullscreen();
     }
+    return Promise.resolve();
   }, []);
 
   return {

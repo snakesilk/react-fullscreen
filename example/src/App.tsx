@@ -14,13 +14,17 @@ function App() {
     }
   }, [screen1, screen2]);
 
+  const handleEnterWithErrorLogging = useCallback(() => {
+    return screen2.enter().catch(console.error);
+  }, [screen2]);
+
   return (
     <div>
       <button onClick={screen1.enter}>
         First
       </button>
 
-      <button onClick={screen2.enter}>
+      <button onClick={handleEnterWithErrorLogging}>
         Second
       </button>
 
