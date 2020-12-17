@@ -109,10 +109,10 @@ interface FullScreenHandle {
   active: boolean;
   // Specifies if attached element is currently full screen.
 
-  enter: () => void;
+  enter: () => Promise<void>;
   // Requests this element to go full screen.
 
-  exit: () => void;
+  exit: () => Promise<void>;
   // Requests this element to exit full screen.
 
   node: React.MutableRefObject<HTMLDivElement | null>;
