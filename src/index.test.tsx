@@ -23,7 +23,9 @@ describe('useFullScreenHandle', () => {
   const mockNode = Symbol('fake node');
 
   beforeEach(() => {
+    fscreen.fullscreenElement = undefined;
     fscreen.addEventListener = jest.fn();
+    fscreen.removeEventListener = jest.fn();
     fscreen.exitFullscreen = jest.fn(() => Promise.resolve());
     fscreen.requestFullscreen = jest.fn(() => Promise.resolve());
   });
@@ -42,6 +44,10 @@ describe('useFullScreenHandle', () => {
 
     it('listens to fullscreen change', () => {
       expect(fscreen.addEventListener).toHaveBeenCalledTimes(1);
+      expect(fscreen.addEventListener).toHaveBeenCalledWith(
+        'fullscreenchange',
+        expect.any(Function),
+      );
     });
 
     describe('and fullscreen event fires on current handle', () => {
@@ -118,6 +124,36 @@ describe('useFullScreenHandle', () => {
         it('does not call fscreen.requestFullscreen', () => {
           expect(fscreen.requestFullscreen).toHaveBeenCalledTimes(0);
         });
+      });
+    });
+
+    describe('and exit() called', () => {
+      beforeEach(async () => {
+        await act(async () => {
+          hook.result.current.exit();
+        });
+      });
+
+      it('does not call fscreen.exitFullscreen', () => {
+        expect(fscreen.exitFullscreen).toHaveBeenCalledTimes(0);
+      });
+    });
+
+    describe('when unmounted', () => {
+      beforeEach(() => {
+        hook.unmount();
+      });
+
+      it('has removed its event listener', () => {
+        expect(hook.result.current.active).toBe(false);
+      });
+
+      it('listens to fullscreen change', () => {
+        expect(fscreen.removeEventListener).toHaveBeenCalledTimes(1);
+        expect(fscreen.removeEventListener).toHaveBeenCalledWith(
+          'fullscreenchange',
+          listener,
+        );
       });
     });
   });
