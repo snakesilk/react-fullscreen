@@ -1,13 +1,11 @@
 import { FullScreen, useFullScreenHandle } from '.';
 
-describe('FullScreen component', () => {
-  it('is exported', () => {
+describe('exports', () => {
+  it('exports component', () => {
     expect(FullScreen).toBeTruthy();
   });
-});
 
-describe('useFullScreenHandle hook', () => {
-  it('is exported', () => {
+  it('exports hook', () => {
     expect(useFullScreenHandle).toBeTruthy();
   });
 });
