@@ -57,7 +57,13 @@ export const FullScreen: React.FC<FullScreenProps> = ({
   children,
   className,
 }) => {
-  const classNames = ['fullscreen'];
+  const classNames = [];
+  if (className) {
+    classNames.push(className);
+  }
+
+  classNames.push('fullscreen');
+
   if (handle.active) {
     classNames.push('fullscreen-enabled');
   }
@@ -70,7 +76,7 @@ export const FullScreen: React.FC<FullScreenProps> = ({
 
   return (
     <div
-      className={[className, ...classNames].join(' ')}
+      className={classNames.join(' ')}
       ref={handle.node}
       style={handle.active ? { height: '100%', width: '100%' } : undefined}
     >
