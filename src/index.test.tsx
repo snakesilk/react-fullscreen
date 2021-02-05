@@ -1,4 +1,6 @@
+import React from 'react';
 import fscreen from 'fscreen';
+import renderer from 'react-test-renderer'; // ES6
 import {
   act,
   renderHook,
@@ -194,5 +196,43 @@ describe('useFullScreenHandle', () => {
         );
       });
     });
+  });
+});
+
+describe('FullScreen component', () => {
+  it('handles undefined className gracefully', () => {
+    const Comp = () => {
+      const handle = useFullScreenHandle();
+      return <FullScreen handle={handle} />;
+    };
+
+    const component = renderer.create(<Comp />);
+    const element = component.root.findByType('div');
+
+    expect(element.props.className).toBe('fullscreen');
+  });
+
+  it('applies custom className', () => {
+    const Comp = () => {
+      const handle = useFullScreenHandle();
+      return <FullScreen className='my-custom-class' handle={handle} />;
+    };
+
+    const component = renderer.create(<Comp />);
+    const element = component.root.findByType('div');
+
+    expect(element.props.className).toBe('my-custom-class fullscreen');
+  });
+
+  it('applies active class when active', async () => {
+    const hook = renderHook(() => useFullScreenHandle());
+    hook.result.current.active = true;
+
+    const component = renderer.create(
+      <FullScreen handle={hook.result.current} />,
+    );
+
+    const element = component.root.findByType('div');
+    expect(element.props.className).toBe('fullscreen fullscreen-enabled');
   });
 });
