@@ -29,10 +29,22 @@ export function useFullScreenHandle(): FullScreenHandle {
   const enter = useCallback(() => {
     if (fscreen.fullscreenElement) {
       return fscreen.exitFullscreen().then(() => {
-        return fscreen.requestFullscreen ? fscreen.requestFullscreen(node.current) : (fscreen.mozRequestFullScreen) ? fscreen.mozRequestFullScreen(node.current) : fscreen.msRequestFullscreen ? fscreen.msRequestFullscreen(node.current) : fscreen.webkitRequestFullScreen(node.current)
+        return fscreen.requestFullscreen
+          ? fscreen.requestFullscreen(node.current)
+          : fscreen.mozRequestFullScreen
+          ? fscreen.mozRequestFullScreen(node.current)
+          : fscreen.msRequestFullscreen
+          ? fscreen.msRequestFullscreen(node.current)
+          : fscreen.webkitRequestFullScreen(node.current);
       });
     } else if (node.current) {
-      return fscreen.requestFullscreen ? fscreen.requestFullscreen(node.current) : (fscreen.mozRequestFullScreen) ? fscreen.mozRequestFullScreen(node.current) : fscreen.msRequestFullscreen ? fscreen.msRequestFullscreen(node.current) : fscreen.webkitRequestFullScreen(node.current)
+      return fscreen.requestFullscreen
+        ? fscreen.requestFullscreen(node.current)
+        : fscreen.mozRequestFullScreen
+        ? fscreen.mozRequestFullScreen(node.current)
+        : fscreen.msRequestFullscreen
+        ? fscreen.msRequestFullscreen(node.current)
+        : fscreen.webkitRequestFullScreen(node.current);
     }
   }, []);
 
