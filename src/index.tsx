@@ -1,4 +1,10 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+} from 'react';
 import fscreen from 'fscreen';
 
 export interface FullScreenHandle {
@@ -43,12 +49,15 @@ export function useFullScreenHandle(): FullScreenHandle {
     return Promise.resolve();
   }, []);
 
-  return {
-    active,
-    enter,
-    exit,
-    node,
-  };
+  return useMemo(
+    () => ({
+      active,
+      enter,
+      exit,
+      node,
+    }),
+    [active, enter, exit],
+  );
 }
 
 export const FullScreen: React.FC<FullScreenProps> = ({

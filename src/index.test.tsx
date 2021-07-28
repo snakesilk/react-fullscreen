@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import fscreen from 'fscreen';
 import renderer from 'react-test-renderer'; // ES6
 import {
@@ -38,6 +38,29 @@ describe('useFullScreenHandle', () => {
       hook = renderHook(() => useFullScreenHandle());
       hook.result.current.node.current = (mockNode as unknown) as HTMLDivElement;
       listener = fscreen.addEventListener.mock.calls[0][1];
+    });
+
+    it('should cache the handle', () => {
+      expect.assertions(1);
+
+      const hook = renderHook(() => {
+        const handle = useFullScreenHandle();
+
+        const [count, setCount] = useState(0);
+
+        useEffect(() => {
+          setCount((count) => {
+            if (count > 1) {
+              throw new Error('Stop loop');
+            }
+            return count + 1;
+          });
+        }, [handle]);
+
+        return count;
+      });
+
+      expect(hook.result.current).toBe(1);
     });
 
     it('has active flag set to false', () => {
