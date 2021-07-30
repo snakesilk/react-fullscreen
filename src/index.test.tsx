@@ -40,27 +40,12 @@ describe('useFullScreenHandle', () => {
       listener = fscreen.addEventListener.mock.calls[0][1];
     });
 
-    it('should cache the handle', () => {
-      expect.assertions(1);
+    it('returns same handle ref between renders', () => {
+      const ref = hook.result.current;
 
-      const hook = renderHook(() => {
-        const handle = useFullScreenHandle();
+      hook.rerender();
 
-        const [count, setCount] = useState(0);
-
-        useEffect(() => {
-          setCount((count) => {
-            if (count > 1) {
-              throw new Error('Stop loop');
-            }
-            return count + 1;
-          });
-        }, [handle]);
-
-        return count;
-      });
-
-      expect(hook.result.current).toBe(1);
+      expect(hook.result.current).toBe(ref);
     });
 
     it('has active flag set to false', () => {
