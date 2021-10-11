@@ -17,6 +17,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 ### * Setup and render.
 
 You **must** use one handle per full screen element.
+It is not possible to start in Fullscreen. Fullscreen must be enabled from a user action such as `onClick`.
 
 ```jsx
 import React, {useCallback} from 'react';
@@ -99,10 +100,7 @@ function App() {
 export default App;
 ```
 
-It is not possible to start in Fullscreen. Fullscreen must be enabled from a user action such as `onClick`.
-
 ## Types
-
 
 ```ts
 interface FullScreenHandle {
