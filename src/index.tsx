@@ -16,6 +16,7 @@ export interface FullScreenHandle {
 
 export interface FullScreenProps {
   handle: FullScreenHandle;
+  children: any;
   onChange?: (state: boolean, handle: FullScreenHandle) => void;
   className?: string;
 }
